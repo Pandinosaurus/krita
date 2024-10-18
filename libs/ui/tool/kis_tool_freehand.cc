@@ -14,7 +14,6 @@
 #include <QRect>
 #include <QThreadPool>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QScreen>
 
 #include <Eigen/Core>

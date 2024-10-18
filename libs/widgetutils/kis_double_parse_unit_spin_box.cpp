@@ -13,6 +13,9 @@
 #include <QMenu>
 #include <QAction>
 #include <QtMath>
+#include <QRegularExpression>
+#include <QString>
+#include <QActionGroup>
 
 class Q_DECL_HIDDEN KisDoubleParseUnitSpinBox::Private
 {
@@ -114,9 +117,9 @@ void KisDoubleParseUnitSpinBox::setUnitManager(KisSpinBoxUnitManager* unitManage
     double newStep;
 
     if (oldUnitManager == 0 ||
-        oldUnitManager &&
+        (oldUnitManager &&
         (d->unitManager->getApparentUnitSymbol() != oldUnitManager->getApparentUnitSymbol() ||
-         d->unitManager->getUnitDimensionType() == oldUnitManager->getUnitDimensionType())) {
+         d->unitManager->getUnitDimensionType() == oldUnitManager->getUnitDimensionType()))) {
 
         if (oldUnitManager && d->unitManager->getUnitDimensionType() == oldUnitManager->getUnitDimensionType()) {
             //dimension is the same, calculate the new value
@@ -381,7 +384,7 @@ QString KisDoubleParseUnitSpinBox::detectUnit()
 {
     QString str = veryCleanText().trimmed(); //text with the new unit but not the old one.
 
-    QRegExp regexp ("([ ]*[a-zA-Z]+[ ]*)$"); // Letters or spaces at end
+    QRegularExpression regexp ("([ ]*[a-zA-Z]+[ ]*)$"); // Letters or spaces at end
     int res = str.indexOf( regexp );
 
     if (res > -1) {
